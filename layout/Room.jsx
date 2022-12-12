@@ -12,14 +12,17 @@ function Room({navigation}) {
   const [roomId, setRoomiD] = useState();
   const [activeUsers, setActiveUsers] = useState([]);
 
-
   const joinRoom = () => {
     socket.emit('join-room', {roomId: roomId, uName: uName});
-    navigation.navigate('OpenRoom', {roomId: roomId, uName: uName, activeUsers: activeUsers});
+    navigation.navigate('OpenRoom', {
+      roomId: roomId,
+      uName: uName,
+      activeUsers: activeUsers,
+    });
   };
 
   useEffect(() => {
-    const API_URL = 'http://192.168.2.129:3001';
+    const API_URL = 'http://localhost:3001';
     socket = io(`${API_URL}`);
     console.log('Heyooooo');
     socket.on('connection', () => console.log('connected'));
